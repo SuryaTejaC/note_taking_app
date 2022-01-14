@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<form action="{{url_for("home")}}" method="POST">
+    <input type="text" name="content" id="content">
+    <input type="submit" value="Add Task">
+</form>
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>
+            {% if task.done %} <strike> {% endif %}{{ task.content }} {% if task.done %} </strike>{% endif %}
+            <a href="/done/{{ task.id }}">Done</a>
+            <a href="delete/{{task.id}}">Delete</a> 
+            <a href="update/{{task.id}}">Update</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
